@@ -9,10 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      num_order: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       total: {
         type: Sequelize.FLOAT,
         allowNull: false
