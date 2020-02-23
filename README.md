@@ -6,10 +6,10 @@ The goal of this repository is store all backend of the order pasta backend
 2. You have to run ```npm start```
 3. This application will run on ```http://localhost:3000``` for default
 
-# Routes
-## You have to send request to ```http://localhost:3000/api/${something}/
+### Routes
+#### You have to send request to ```http://localhost:3000/api/${something}/
 ---------------------------------------------------------------------------
-### Customer Routes
+## Customer Routes
 
 #### Sign up
  - URI: ```/customers/``` 
@@ -28,7 +28,7 @@ The goal of this repository is store all backend of the order pasta backend
     }
   }
 
-### Get All customers
+#### Get All customers
 - URI: ```/customers/```
 - Method: GET
 - Body: nothing
@@ -55,7 +55,7 @@ The goal of this repository is store all backend of the order pasta backend
   }
 }
 
-### Get customer by email
+#### Get customer by email
 - URI: ```/customers/find?email="put email here"```
 - Method: GET
 - Body: nothing
@@ -72,7 +72,7 @@ The goal of this repository is store all backend of the order pasta backend
   }
 }
 
-### Update customer by id
+#### Update customer by id
 - URI: ```/customers/:id"```
 - Method: PATCH
 - Body: {
@@ -98,7 +98,7 @@ The goal of this repository is store all backend of the order pasta backend
 ---------------------------------------------------------------------------
 ## Product Routes
 
-### save
+#### save
  - URI: ```/products/``` 
  - Method: POST
  - Body: {
@@ -115,7 +115,7 @@ The goal of this repository is store all backend of the order pasta backend
     }
   }
 
-### Get All Products
+#### Get All Products
 - URI: ```/products/```
 - Method: GET
 - Body: nothing
