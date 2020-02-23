@@ -1,5 +1,5 @@
 import { CustomerDb } from "../models";
-import { IParamsCustomer } from "../facilities/interfaces/I-Signup";
+import { IParamsCustomer } from "../facilities/interfaces/I-params-customer";
 import Customer from "../entity/customer";
 
 export default class CustomerRepository {
