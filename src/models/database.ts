@@ -1,20 +1,20 @@
 import { Sequelize } from "sequelize-typescript";
-import CustomerDb from "./customerDb";
+import {CustomerDb, OrderDb, ProductDb, ItemDb} from "./index";
 
 
 export default class ConnectionFactory {
 
   private connection;
   private config;
-  constructor(config) { 
+  constructor(config) {
     this.config = config;
   }
 
   public connect(): Sequelize {
-     this.connection = new Sequelize(this.config.database.name, "postgres", this.config.database.password, {
+    this.connection = new Sequelize(this.config.database.name, "postgres", this.config.database.password, {
       host: this.config.database.host,
       dialect: "postgres",
-      models: [CustomerDb]
+      models: [CustomerDb, OrderDb, ProductDb, ItemDb]
     });
     return this.connection;
   }
@@ -29,9 +29,9 @@ export default class ConnectionFactory {
     return this.connection;
   }
 
-  public buildModels(sequelize: Sequelize): void{
+  public buildModels(sequelize: Sequelize): void {
     sequelize.addModels([
-      CustomerDb
+      CustomerDb, OrderDb, ProductDb, ItemDb
     ]);
   }
 }

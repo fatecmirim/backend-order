@@ -1,5 +1,6 @@
-import { Column, Table } from "sequelize-typescript";
-import { Model, DataTypes } from "sequelize/types";
+import { Model, Column, Table, ForeignKey } from "sequelize-typescript";
+import { DataTypes } from "sequelize";
+import { CustomerDb } from "./customerDb";
 
 @Table({ tableName: "orders" })
 export class OrderDb extends Model<OrderDb> {
@@ -10,7 +11,8 @@ export class OrderDb extends Model<OrderDb> {
   })
   public id: number;
 
-  @Column({ type: DataTypes.FLOAT })
-  public total: string;
+  @ForeignKey(() => CustomerDb)
+  @Column({type: DataTypes.INTEGER})
+  public customer_id;
 
 }

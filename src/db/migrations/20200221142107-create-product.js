@@ -17,6 +17,10 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false
       },
+      kg: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
       stock: {
         type: Sequelize.INTEGER,
         allowNull: false

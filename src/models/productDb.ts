@@ -1,5 +1,5 @@
-import { Column, Table } from "sequelize-typescript";
-import { Model, DataTypes } from "sequelize/types";
+import { Model, Column, Table } from "sequelize-typescript";
+import { DataTypes } from "sequelize";
 
 @Table({ tableName: "products" })
 export class ProductDb extends Model<ProductDb> {
@@ -14,7 +14,10 @@ export class ProductDb extends Model<ProductDb> {
   public name: string;
 
   @Column({ type: DataTypes.FLOAT })
-  public price: string;
+  public kg: number;
+
+  @Column({ type: DataTypes.FLOAT })
+  public price: number;
 
   @Column({ type: DataTypes.INTEGER })
   public stock: string;
