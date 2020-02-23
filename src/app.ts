@@ -3,6 +3,7 @@ import routes from "./routes";
 import * as dotenv from "dotenv";
 import config from "./environment/config";
 import ConnectionFactory from "./models/database";
+import bodyParser from "body-parser";
 
 export default class App {
 
@@ -10,13 +11,13 @@ export default class App {
     private readonly app = express(),
   ) {
     dotenv.config();
+    this.middlewares();
     this.connectDatabase();
     this.routes();
-    this.middlewares();
   }
 
   private middlewares(): void {
-    console.log("without middleware");
+    this.app.use(bodyParser.json());
   }
 
   private async connectDatabase(): Promise<void> {

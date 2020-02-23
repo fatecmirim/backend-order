@@ -9,17 +9,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      user_id: {
+      customer_id: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      total: {
-        type: Sequelize.FLOAT,
-        allowNull: true
-      },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE
-    });
+    }).then(() => {
+      return queryInterface.addConstraint("orders", ["customer_id"], {
+        type: "foreign key",
+        name: "customer_id_fkey",
+        references: {
+          table: "customers",
+          field: "id"
+        },
+        onDelete: "SET NULL",
+      });
+    })
   },
 
   down: (queryInterface, Sequelize) => {
