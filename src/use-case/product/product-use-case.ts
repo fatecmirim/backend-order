@@ -14,4 +14,16 @@ export class ProductUseCase {
   public async getAllProduct(): Promise<Product[]> {
     return this.productRepository.getAllProduct();
   }
+
+  public async getProductById(productId: number): Promise<Product | null> {
+    return this.productRepository.getProductById(productId);
+  }
+
+  public async getProductByNameIlike(productName: string): Promise<Product[]> {
+    return this.productRepository.getProductByNameIlike(productName);
+  }
+
+  public async updateProductById(producId: number, params: IParamsProduct): Promise<Product | null> {
+    return this.productRepository.updateProductById(producId, params);
+  }
 }

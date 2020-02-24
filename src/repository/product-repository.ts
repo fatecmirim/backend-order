@@ -1,6 +1,7 @@
 import { IParamsProduct } from "src/facilities/interfaces/i-params-product";
 import Product from "../entity/product";
 import { ProductDb } from "../models";
+import sequelize = require("sequelize");
 
 export class ProductRepository {
   constructor() {}
@@ -41,5 +42,32 @@ export class ProductRepository {
     const products = await ProductDb.findAll();
     if(!products.length) return [];
     return products.map((product) => ProductRepository.returnFromDatabase(product));
+  }
+
+  public async getProductById(productId: number): Promise<Product | null> {
+    const product = await ProductDb.findByPk(productId);
+    if (!product) return null;
+    return ProductRepository.returnFromDatabase(product);
+  }
+
+  public async getProductByNameIlike(productName: string): Promise<Product[]> {
+    const products = 
+    await ProductDb.sequelize?.query(`SELECT * FROM products WHERE NAME ILIKE '%${productName}%';`, { type: sequelize.QueryTypes.SELECT });
+    console.log(products);
+    
+    if (!products) return [];
+    return products.map((product) => ProductRepository.returnFromDatabase(product));
+  }
+
+  public async updateProductById(productId: number, params: IParamsProduct): Promise<Product | null> {
+    const product = await ProductDb.findByPk(productId);
+    if(!product) return null;
+    product.name = params.name || product.name;
+    product.price = params.price || product.price;
+    product.stock = params.stock || product.stock;
+    product.kg = params.kg || product.kg;
+
+    const productUpdated = await product.save();
+    return ProductRepository.returnFromDatabase(productUpdated);
   }
 }

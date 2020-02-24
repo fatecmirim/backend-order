@@ -19,7 +19,7 @@ The goal of this repository is store all backend of the order pasta backend
     "email":"Some correct email",
     "password":"type a password",
     "phone":"Type a phone number"
-  }
+  }```
   - All fields are required
   - Response: {
     - status: 201
@@ -140,6 +140,66 @@ The goal of this repository is store all backend of the order pasta backend
     ]
   }
 }
+
+#### Get Product by id 
+- URI: ```/products/:id```
+- Method: GET
+- Body: nothing
+- Response: {
+  - status 200
+  - body {
+    {
+      "id": 2,
+      "name": "massa de pastel",
+      "price": 2.5,
+      "kg": 0.5,
+      "stock": 10
+    }
+  }
+}
+
+#### Get Product by name ilike 
+- URI: ```/products/name/?productName=part of product name```
+- Method: GET
+- Body: nothing
+- Response: {
+  - status 200
+  - body {
+    {
+      "id": 2,
+      "name": "massa de pastel",
+      "price": 2.5,
+      "kg": 0.5,
+      "stock": 10
+    }
+  }
+}
+
+#### Update Product by id 
+- URI: ```/products/name/:id```
+- Method: PATCH
+- Body: {
+    {
+      "id": 2,
+      "name": "massa de pastel",
+      "price": 2.5,
+      "kg": 0.5,
+      "stock": 10
+    }
+  }
+- Response: {
+  - status 200
+  - body {
+    {
+      "id": 2,
+      "name": "massa de pastel",
+      "price": 2.5,
+      "kg": 0.5,
+      "stock": 10
+    }
+  }
+}
+
 
 
 

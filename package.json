@@ -4,9 +4,10 @@
   "description": "The goal of this repository is store all backend of the order pasta backend",
   "main": "index.js",
   "scripts": {
+    "build": "tsc --project tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prestart": "tsc --project tsconfig.json && sequelize db:migrate",
-    "start": "node dist/server.js"
+    "prestart": "npm run build && sequelize db:migrate",
+    "start": "nodemon dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -43,6 +44,7 @@
     "@types/joi": "^14.3.4",
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
+    "nodemon": "^2.0.2",
     "sequelize-cli": "^5.5.1"
   }
 }

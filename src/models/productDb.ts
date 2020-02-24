@@ -20,6 +20,6 @@ export class ProductDb extends Model<ProductDb> {
   public price: number;
 
   @Column({ type: DataTypes.INTEGER })
-  public stock: string;
+  public stock: number;
 
 }
