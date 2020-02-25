@@ -1,10 +1,9 @@
 import { ResponseStatus } from "../../facilities/enums/respose-status";
 import { CustomerSignupUseCase } from "../../use-case/customer/customer-signup-use-case";
 import { CustomerUseCase } from "../../use-case/customer/customer-use-case";
-import Customer from "src/entity/customer";
 
 
-export class CustomersController {
+export class CustomerController {
 
   constructor(
     private readonly customerSignupUseCase = new CustomerSignupUseCase(),

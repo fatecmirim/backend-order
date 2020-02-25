@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router();
-import { CustomersController } from "./controller";
+import { CustomerController } from "./controller";
 import { CustomerValidator } from "./validator";
-const controller = new CustomersController();
+const controller = new CustomerController();
 
 router.post("/", CustomerValidator.validateSignUp, (req, res, next) => {
   controller.signup(req, res, next);
