@@ -39,5 +39,16 @@ export class ProductValidator {
       return next();
     });
   }
+
+  public static validateVerifyProductStock(req: Request, res: Response, next: NextFunction) {
+    const schema = Joi.object().keys({
+      id: Joi.number().positive().integer().required(),
+      quantity: Joi.number().positive().integer().required()
+    });
+    Joi.validate({ ...req.query }, schema, (err) => {
+      if (err) return next(err);
+      return next();
+    });
+  }
   
 }

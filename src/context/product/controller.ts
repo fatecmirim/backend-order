@@ -63,6 +63,16 @@ export class ProductController {
     }
   }
 
+  public async verifyProductStock(req, res, next): Promise<void> {
+    try {
+      const { id, quantity } = req.query;
+      const response = await this.productUseCase.verifyProductStock(id, quantity);
+      return res.status(ResponseStatus.SUCCESS).json({"message":response});
+    } catch (error) {
+      this.sendServerError(res,error);
+    }
+  }
+
   private sendServerError(res, error?): void{
     let message = error.message || { message: `Something went wrong` };
     return res.status(ResponseStatus.SERVER_ERROR).json(message);

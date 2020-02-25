@@ -70,4 +70,10 @@ export class ProductRepository {
     const productUpdated = await product.save();
     return ProductRepository.returnFromDatabase(productUpdated);
   }
+
+  public async verifyProductStock(id: number, quantity: number): Promise<boolean> {
+    const product = await ProductDb.findByPk(id);
+    if (!product) return false;
+    return product.stock >= quantity;
+  }
 }

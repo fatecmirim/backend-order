@@ -16,6 +16,10 @@ router.get("/name", ProductValidator.validateGetProductByName, (req, res, next) 
   controller.getProductByNameIlike(req, res, next);
 });
 
+router.get("/stock", ProductValidator.validateVerifyProductStock, (req, res, next) => {
+  controller.verifyProductStock(req, res, next);
+});
+
 router.get("/:id", (req, res, next) => {
   controller.getProductById(req, res, next);
 });

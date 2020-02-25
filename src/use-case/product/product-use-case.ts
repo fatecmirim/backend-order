@@ -26,4 +26,8 @@ export class ProductUseCase {
   public async updateProductById(producId: number, params: IParamsProduct): Promise<Product | null> {
     return this.productRepository.updateProductById(producId, params);
   }
+
+  public async verifyProductStock(id: number, quantity: number): Promise<boolean> {
+    return this.productRepository.verifyProductStock(id, quantity);
+  }
 }
