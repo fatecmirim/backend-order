@@ -1,7 +1,27 @@
 import App from "./app";
 import { CustomerDb, ProductDb, OrderDb, ItemDb }  from "./models/index";
+import OrderUseCase from "./use-case/order/order-use-case";
 
-new App().start().then();
+new App().start().then( async (c) => {
+  const orderUseCase = new OrderUseCase();
+  const params = {
+    customerId: 1,
+    items: [
+      {
+        productId: 2,
+        quantity: 2
+      },
+      {
+        productId: 3,
+        quantity: 4
+      }
+    ]
+  }
+  console.log(params);
+  
+  await orderUseCase.saveOrder(params);
+
+});
   
   
   //   const CustomerModel = new CustomerDb({
