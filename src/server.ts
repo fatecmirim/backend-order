@@ -1,5 +1,4 @@
 import App from "./app";
-import { CustomerDb, ProductDb, OrderDb, ItemDb }  from "./models/index";
 import OrderUseCase from "./use-case/order/order-use-case";
 
 new App().start().then( async (c) => {
@@ -8,17 +7,16 @@ new App().start().then( async (c) => {
     customerId: 1,
     items: [
       {
-        productId: 2,
+        productId: 1,
         quantity: 2
       },
       {
-        productId: 3,
+        productId: 2,
         quantity: 4
       }
     ]
   }
-  console.log(params);
-  
+  console.log("PArams", params);
   await orderUseCase.saveOrder(params);
 
 });

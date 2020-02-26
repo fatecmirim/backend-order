@@ -76,4 +76,12 @@ export class ProductRepository {
     if (!product) return false;
     return product.stock >= quantity;
   }
+
+  public async updateStock(productId: number, quantity: number): Promise<void> {
+    const product = await ProductDb.findByPk(productId);
+    if (product) {
+      (product.stock - quantity) < 0 ? product.stock = 0 : product.stock = (product.stock - quantity);
+      await product.save();
+    }
+  }
 }

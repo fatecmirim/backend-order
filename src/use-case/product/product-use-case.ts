@@ -30,4 +30,8 @@ export class ProductUseCase {
   public async verifyProductStock(id: number, quantity: number): Promise<boolean> {
     return this.productRepository.verifyProductStock(id, quantity);
   }
+
+  public async updateStock(productId: number, quantity): Promise<void> {
+    return this.productRepository.updateStock(productId, quantity);
+  }
 }

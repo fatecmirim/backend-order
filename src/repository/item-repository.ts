@@ -29,7 +29,6 @@ export default class ItemRepository {
   public async create(orderId: number, itemWithProduct): Promise<Item> {
     const { quantity, product } = itemWithProduct;
     console.log(product);
-    
     const item = new ItemDb({
       order_id: orderId,
       product_id: product.id,
