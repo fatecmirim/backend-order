@@ -1,5 +1,5 @@
 import Customer from "../../entity/customer";
-import { IParamsCustomer } from "../../facilities/interfaces/I-params-customer";
+import { IParamsCustomer } from "../../facilities/interfaces/i-params-customer";
 import CustomerRepository from "../../repository/customer-repository";
 
 export class CustomerSignupUseCase {

@@ -1,12 +1,12 @@
 
-export interface ResponseOrder {
+export interface IOrderResponse {
   orderNumber: number;
-  products: IProductResponseOrder[];
+  products: IProductOrderResponse[];
   total: number;
 }
 
 
-export interface IProductResponseOrder {
+export interface IProductOrderResponse {
   name: string,
   quantity: number;
   price: number;

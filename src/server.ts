@@ -1,24 +1,7 @@
 import App from "./app";
-import OrderUseCase from "./use-case/order/order-use-case";
 
 new App().start().then( async (c) => {
-  const orderUseCase = new OrderUseCase();
-  const params = {
-    customerId: 1,
-    items: [
-      {
-        productId: 1,
-        quantity: 2
-      },
-      {
-        productId: 2,
-        quantity: 4
-      }
-    ]
-  }
-  console.log("PArams", params);
-  await orderUseCase.saveOrder(params);
-
+  
 });
   
   

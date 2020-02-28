@@ -1,4 +1,4 @@
-import { Item } from "../../facilities/interfaces/I-order";
+import { Item } from "../../facilities/interfaces/i-order";
 import { ProductUseCase } from "../product/product-use-case";
 import ItemRepository from "../../repository/item-repository";
 import { ItemWithProduct } from "../../facilities/interfaces/i-item";

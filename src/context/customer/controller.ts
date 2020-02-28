@@ -66,7 +66,6 @@ export class CustomerController {
     
   }
 
-
   private sendServerError(res, error?) {
     let message = error.message || { message: `Something went wrong` };
     return res.status(ResponseStatus.SERVER_ERROR).json(message);
