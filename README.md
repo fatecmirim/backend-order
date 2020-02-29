@@ -176,7 +176,8 @@ The goal of this repository is store all backend of the order pasta backend
 }
 
 #### Update Product by id 
-- URI: ```/products/name/:id```
+```javascript
+- URI: /products/name/:id
 - Method: PATCH
 - Body: {
     {
@@ -199,6 +200,49 @@ The goal of this repository is store all backend of the order pasta backend
     }
   }
 }
+```
+---------------------------------------------------------------------------
+## Order Routes
+
+#### save
+  ```javascript
+ - URI: /orders/
+ - Method: POST
+ - Body: {
+    "customerId": 1,
+    "items": [
+      {
+        "productId": 2,
+        "quantity": 10
+      },
+      {
+        "productId": 3,
+        "quantity": 10
+      }
+    ]
+  }
+  - All fields are required
+  - Response: {
+    "products": [
+        {
+            "name": "massa de cannoli",
+            "price": 2.5,
+            "quantity": 10,
+            "subTotal": 25
+        },
+        {
+            "name": "massa de pizza",
+            "price": 5,
+            "quantity": 10,
+            "subTotal": 50
+        }
+    ],
+    "orderNumber": 55,
+    "total": 75
+  }
+  ```
+  
+
 
 
 
