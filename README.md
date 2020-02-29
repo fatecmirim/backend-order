@@ -12,7 +12,8 @@ The goal of this repository is store all backend of the order pasta backend
 ## Customer Routes
 
 #### Sign up
- - URI: ```/customers/``` 
+```javascript
+ - URI: /customers/ 
  - Method: POST
  - Body: {
     "name":"Some name",
@@ -27,9 +28,10 @@ The goal of this repository is store all backend of the order pasta backend
       "message": "Created"
     }
   }
-
+```
 #### Get All customers
-- URI: ```/customers/```
+```javascript
+- URI: /customers/
 - Method: GET
 - Body: nothing
 - Response: {
@@ -54,9 +56,10 @@ The goal of this repository is store all backend of the order pasta backend
     ]
   }
 }
-
+```
 #### Get customer by email
-- URI: ```/customers/find?email="put email here"```
+```javascript
+- URI: /customers/find?email="put email here"
 - Method: GET
 - Body: nothing
 - qs: email="the email"
@@ -71,9 +74,10 @@ The goal of this repository is store all backend of the order pasta backend
     }
   }
 }
-
+```
 #### Update customer by id
-- URI: ```/customers/:id"```
+```javascript
+- URI: /customers/:id
 - Method: PATCH
 - Body: {
     "name":"rafael jordao jardim",
@@ -94,12 +98,13 @@ The goal of this repository is store all backend of the order pasta backend
     }
   }
 }
-
+```
 ---------------------------------------------------------------------------
 ## Product Routes
 
 #### save
- - URI: ```/products/``` 
+```javascript
+ - URI: /products/
  - Method: POST
  - Body: {
       "name":"massa de pastel",
@@ -114,9 +119,10 @@ The goal of this repository is store all backend of the order pasta backend
       "message": "Created"
     }
   }
-
+```
 #### Get All Products
-- URI: ```/products/```
+```javascript
+- URI: /products/
 - Method: GET
 - Body: nothing
 - Response: {
@@ -140,9 +146,10 @@ The goal of this repository is store all backend of the order pasta backend
     ]
   }
 }
-
-#### Get Product by id 
-- URI: ```/products/:id```
+```
+#### Get Product by id
+```javascript
+- URI: /products/:id
 - Method: GET
 - Body: nothing
 - Response: {
@@ -157,9 +164,10 @@ The goal of this repository is store all backend of the order pasta backend
     }
   }
 }
-
+```
 #### Get Product by name ilike 
-- URI: ```/products/name/?productName=part of product name```
+```javascript
+- URI: /products/name/?productName=part of product name
 - Method: GET
 - Body: nothing
 - Response: {
@@ -174,7 +182,7 @@ The goal of this repository is store all backend of the order pasta backend
     }
   }
 }
-
+```
 #### Update Product by id 
 ```javascript
 - URI: /products/name/:id
