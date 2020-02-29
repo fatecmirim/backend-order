@@ -2,7 +2,6 @@ import { IParamsOrder } from "src/facilities/interfaces/i-order";
 import OrderRepository from "../../repository/order-repository";
 import ItemUseCase from "../item/item-use-case";
 import { ProductUseCase } from "../product/product-use-case";
-import { IOrderResponse } from "../../facilities/interfaces/i-order-response";
 import OrderResponse from "../../entity/order-response";
 import { ProductResponse } from "../../entity/product-response";
 
@@ -13,8 +12,14 @@ export default class OrderUseCase {
     private readonly productUseCase: ProductUseCase = new ProductUseCase()
   ) {}
 
-  public async saveOrder(params: IParamsOrder): Promise<OrderResponse> {
+  public async saveOrder(params: IParamsOrder): Promise<any> {
     const { customerId, items } = params;
+    const isThereStockToAllProducts = await this.verifyIfExistStockToAllProducts(items);
+    console.log(isThereStockToAllProducts);
+    
+    if (!isThereStockToAllProducts) {
+      throw { message:`Some of the products in the list there no stock available` };
+    }
     const order = await this.orderRepository.createOrder(customerId);
     const itemsWithProducts = await this.itemUseCase.getProductsFromItems(items);
     
@@ -53,5 +58,17 @@ export default class OrderUseCase {
     orderResponse.orderNumber = orderId;
     orderResponse.total = total;
     return orderResponse;    
+  }
+
+  private async verifyIfExistStockToAllProducts(items: any): Promise<any> {
+    let response = true;
+    const resultBooleand = await Promise.all(items.map(async (item) => {
+      let itemHasStock = this.productUseCase.verifyProductStock(item.productId, item.quantity);
+      return itemHasStock;
+    }));
+    resultBooleand.forEach((result) => {
+      if (!result) response = false;
+    });
+    return response;
   }
 }
