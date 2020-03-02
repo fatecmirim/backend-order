@@ -18,7 +18,11 @@ export default class ItemUseCase {
     return Promise.all(itemsWithProduct);
   }
 
-  public async create(orderId: number, itemWithProduct): Promise<any> {
+  public async create(orderId: number, itemWithProduct): Promise<Item> {
     return this.itemRepository.create(orderId, itemWithProduct);
+  }
+
+  public async getAllItemsByOrderId(orderId: number): Promise<Item[]> {
+    return this.itemRepository.getAllItemsByOrderId(orderId);
   }
 }

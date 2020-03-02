@@ -12,6 +12,10 @@ export default class OrderRepository {
     if(row["customer_id"]) {
       order.customerId = row["customer_id"];
     }
+    if(row["createdAt"]) {
+      const date = new Date(row["createdAt"]);
+      order.createdAt = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()} at ${date.getHours()}:${date.getMinutes()}`;    
+    }
     return order;
   }
 
@@ -19,9 +23,15 @@ export default class OrderRepository {
     const order = new OrderDb({
       customer_id: customerId
     });
-    const orderSaved = await order.save();
-    console.log(orderSaved);
-    
+    const orderSaved = await order.save();    
     return OrderRepository.returnFromDatabase(orderSaved);
+  }
+
+  public async retrieveOrdersByCustomerId(customerId: number): Promise<Order[]> {
+    const orders = await OrderDb.findAll({ where: { customer_id: customerId } });
+
+    if(!orders) return [];
+
+    return orders.map((order) => OrderRepository.returnFromDatabase(order));
   }
 }

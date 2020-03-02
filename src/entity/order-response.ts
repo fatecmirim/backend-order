@@ -7,4 +7,5 @@ export default class OrderResponse {
   public orderNumber: number;
   public products: ProductResponse[];
   public total: number;
+  public date: string;
 }

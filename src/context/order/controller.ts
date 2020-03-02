@@ -1,10 +1,12 @@
 import { IParamsOrder } from "../../facilities/interfaces/i-order";
-import OrderUseCase from "../../use-case/order/order-use-case";
+import OrderUseCase from "../../use-case/order/save-order-use-case";
 import { ResponseStatus } from "../../facilities/enums/respose-status";
+import RetrieveOrdersFromCustomerUseCase from "../../use-case/order/retrieve-orders-from-customer-use-case";
 
 export class OrderController {
   constructor(
-    private readonly orderUseCase: OrderUseCase = new OrderUseCase()
+    private readonly orderUseCase: OrderUseCase = new OrderUseCase(),
+    private readonly retrieveOrderFromCustomerUseCase = new RetrieveOrdersFromCustomerUseCase()
   ){}
 
   public async saveOrder(req, res, next): Promise<void> {
@@ -16,7 +18,19 @@ export class OrderController {
     } catch (error) {
       this.sendServerError(res, error);
     }
-    
+  }
+
+  public async retrieveOrdersByCustomerId(req, res, next): Promise<void> {
+    try {
+      const { customerId } = req.query;
+      const ordersFromCustomer = await this.retrieveOrderFromCustomerUseCase.retrieveOrdersByCustomerId(customerId);
+      
+      if (!ordersFromCustomer) return res.status(ResponseStatus.NOT_FOUND).json();
+      return res.status(ResponseStatus.SUCCESS).json(ordersFromCustomer);
+    } catch (error) {
+      this.sendServerError(res, error);
+    }
+
   }
   
   private sendServerError(res, error?) {

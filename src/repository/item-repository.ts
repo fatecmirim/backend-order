@@ -41,4 +41,10 @@ export default class ItemRepository {
     }
     throw {message:`Quantity is bigger than product stock`};
   }
+
+  public async getAllItemsByOrderId(orderId: number): Promise<Item[]> {
+    const items = await ItemDb.findAll({ where: { order_id: orderId } });
+    if (!items) return [];
+    return items.map((item) => ItemRepository.returnFromDatabase(item)); 
+  }
 }

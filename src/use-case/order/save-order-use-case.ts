@@ -4,6 +4,7 @@ import ItemUseCase from "../item/item-use-case";
 import { ProductUseCase } from "../product/product-use-case";
 import OrderResponse from "../../entity/order-response";
 import { ProductResponse } from "../../entity/product-response";
+import { ItemWithProduct } from "../../facilities/interfaces/i-item";
 
 export default class OrderUseCase {
   constructor(
@@ -26,7 +27,7 @@ export default class OrderUseCase {
     const itemsFullfield = await this.saveItems(order.id, itemsWithProducts);
     await this.removeFromStockTheProductsSold(itemsFullfield);
     
-    return this.makeResponseOrder(order.id, itemsWithProducts);
+    return this.makeResponseOrder(order.id, itemsWithProducts, order.createdAt);
   }
 
 
@@ -42,7 +43,7 @@ export default class OrderUseCase {
     });
   }
 
-  private async makeResponseOrder(orderId:number, itemsWithProducts): Promise<OrderResponse> {
+  private async makeResponseOrder(orderId: number, itemsWithProducts: ItemWithProduct[], orderDate: string): Promise<OrderResponse> {
     const orderResponse: OrderResponse = new OrderResponse();
     let productResponse: ProductResponse = new ProductResponse();
     let total: number = 0;
@@ -55,12 +56,15 @@ export default class OrderUseCase {
       total += productResponse.subTotal;
       orderResponse.products.push({...productResponse});
     });
+    orderResponse.date = orderDate;
     orderResponse.orderNumber = orderId;
     orderResponse.total = total;
+    console.log(orderResponse);
+    
     return orderResponse;    
   }
 
-  private async verifyIfExistStockToAllProducts(items: any): Promise<any> {
+  private async verifyIfExistStockToAllProducts(items: any): Promise<boolean> {
     let response = true;
     const resultBooleand = await Promise.all(items.map(async (item) => {
       let itemHasStock = this.productUseCase.verifyProductStock(item.productId, item.quantity);

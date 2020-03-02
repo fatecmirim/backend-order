@@ -9,4 +9,8 @@ router.post("/", OrderValidator.validateSaveOrder, (req, res, next) => {
   controller.saveOrder(req, res, next);
 });
 
+router.get("/", (req, res, next) => {
+  controller.retrieveOrdersByCustomerId(req, res, next);
+});
+
 export default router;

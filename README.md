@@ -249,6 +249,69 @@ The goal of this repository is store all backend of the order pasta backend
     "total": 75
   }
   ```
+
+  #### Retrieve orders by customer id
+  ```javascript
+ - URI: /orders/?customerId=1
+ - Method: GET
+ - Body: no content
+  - Response: [
+    {
+        "products": [
+            {
+                "name": "massa de cannoli",
+                "price": 2.5,
+                "quantity": 1,
+                "subTotal": 2.5
+            },
+            {
+                "name": "massa de pizza",
+                "price": 5,
+                "quantity": 1,
+                "subTotal": 5
+            }
+        ],
+        "orderNumber": 56,
+        "total": 7.5
+    },
+    {
+        "products": [
+            {
+                "name": "massa de cannoli",
+                "price": 2.5,
+                "quantity": 1,
+                "subTotal": 2.5
+            },
+            {
+                "name": "massa de pizza",
+                "price": 5,
+                "quantity": 1,
+                "subTotal": 5
+            }
+        ],
+        "orderNumber": 57,
+        "total": 7.5
+    },
+    {
+        "products": [
+            {
+                "name": "massa de pizza",
+                "price": 5,
+                "quantity": 10,
+                "subTotal": 50
+            },
+            {
+                "name": "massa de cannoli",
+                "price": 2.5,
+                "quantity": 10,
+                "subTotal": 25
+            }
+        ],
+        "orderNumber": 55,
+        "total": 75
+    }
+]
+  ```
   
 
 
