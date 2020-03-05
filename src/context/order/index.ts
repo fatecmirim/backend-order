@@ -13,4 +13,8 @@ router.get("/", (req, res, next) => {
   controller.retrieveOrdersByCustomerId(req, res, next);
 });
 
+router.get("/all", (req, res, next) => {
+  controller.retrieveAllOrders(req, res, next);
+});
+
 export default router;

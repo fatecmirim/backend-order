@@ -312,6 +312,85 @@ The goal of this repository is store all backend of the order pasta backend
     }
 ]
   ```
+
+  #### Retrieve all orders to adm
+  ```javascript
+ - Just adm user will can retrieve all orders
+ - URI: /orders/all
+ - Method: GET
+ - Body: no content
+  - Response: [
+  {
+    "orderResponse": {
+      "products": [
+        {
+          "name": "massa de cannoli",
+          "price": 2.5,
+          "quantity": 1,
+          "subTotal": 2.5
+        },
+        {
+          "name": "massa de pizza",
+          "price": 5,
+          "quantity": 1,
+          "subTotal": 5
+        }
+      ],
+      "date": "1/2/2020 at 9:55",
+      "orderNumber": 56,
+      "total": 7.5
+    },
+    "customerName": "rafael jordao jardim",
+    "customerPhone": "1999676552"
+  },
+  {
+    "orderResponse": {
+      "products": [
+        {
+          "name": "massa de cannoli",
+          "price": 2.5,
+          "quantity": 1,
+          "subTotal": 2.5
+        },
+        {
+          "name": "massa de pizza",
+          "price": 5,
+          "quantity": 1,
+          "subTotal": 5
+        }
+      ],
+      "date": "1/2/2020 at 10:3",
+      "orderNumber": 57,
+      "total": 7.5
+    },
+    "customerName": "rafael jordao jardim",
+    "customerPhone": "1999676552"
+  },
+  {
+    "orderResponse": {
+      "products": [
+        {
+          "name": "massa de cannoli",
+          "price": 2.5,
+          "quantity": 1,
+          "subTotal": 2.5
+        },
+        {
+          "name": "massa de pizza",
+          "price": 5,
+          "quantity": 1,
+          "subTotal": 5
+        }
+      ],
+      "date": "1/2/2020 at 10:18",
+      "orderNumber": 58,
+      "total": 7.5
+    },
+    "customerName": "rafael jordao jardim",
+    "customerPhone": "1999676552"
+  }
+]
+  ```
   
 
 

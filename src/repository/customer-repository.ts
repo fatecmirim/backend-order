@@ -16,6 +16,9 @@ export default class CustomerRepository {
     if(row["email"]) {
       customer.email = row["email"];
     }
+    if(row["phone"]) {
+      customer.phone = row["phone"];
+    }
     return customer;
   }
 
@@ -58,5 +61,10 @@ export default class CustomerRepository {
       return CustomerRepository.returnFromDatabase(customerUpdated);
     }
     return null;
+  }
+
+  public async getCustomerById(id: number): Promise<Customer> {
+    const customer = await CustomerDb.findByPk(id);
+    return CustomerRepository.returnFromDatabase(customer);
   }
 }

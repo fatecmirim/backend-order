@@ -1,5 +1,6 @@
 import Order from "../entity/order";
 import { OrderDb } from "../models";
+import { Op } from "sequelize";
 
 export default class OrderRepository {
   constructor() {}
@@ -34,4 +35,18 @@ export default class OrderRepository {
 
     return orders.map((order) => OrderRepository.returnFromDatabase(order));
   }
+
+  public async retrieveAllOrders(): Promise<Order[]> {
+    const date = new Date();
+    date.setHours(6, 0, 0 ,0);
+    const orders = await OrderDb.findAll({
+      where: {
+        createdAt: { [Op.gt]: date }
+      }
+    });
+    if(!orders) return [];
+
+    return orders.map((order) => OrderRepository.returnFromDatabase(order));
+  }
+
 }

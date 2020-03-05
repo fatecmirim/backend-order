@@ -3,6 +3,7 @@ export interface IOrderResponse {
   orderNumber: number;
   products: IProductOrderResponse[];
   total: number;
+  date: string;
 }
 
 

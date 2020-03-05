@@ -5,12 +5,15 @@ import Order from "../../entity/order";
 import { ItemWithProduct } from "../../facilities/interfaces/i-item";
 import { ProductResponse } from "../../entity/product-response";
 import { ProductsResponseWithTotal } from "../../facilities/interfaces/i-order";
+import RetrieveOrderUseCase from "./retrieve-order-use-case";
 
-export default class RetrieveOrdersFromCustomerUseCase {
+export default class RetrieveOrdersFromCustomerUseCase  extends RetrieveOrderUseCase{
   constructor(
     private readonly orderRepository: OrderRepository = new OrderRepository(),
     private readonly itemUseCase: ItemUseCase = new ItemUseCase(),
-  ) {}
+  ) {
+    super();
+  }
 
   public async retrieveOrdersByCustomerId(customerId: number): Promise<OrderResponse[]> {
     const ordersFromCustomer = await this.orderRepository.retrieveOrdersByCustomerId(customerId);
@@ -25,7 +28,7 @@ export default class RetrieveOrdersFromCustomerUseCase {
       orderResponse.orderNumber = order.id;
       const items = await this.itemUseCase.getAllItemsByOrderId(order.id);
       const itemsWithProducts: ItemWithProduct[] = await this.itemUseCase.getProductsFromItems(items);
-      const productsResponseWithTotal = this.makeProductsResponses(itemsWithProducts);
+      const productsResponseWithTotal = super.makeProductsResponses(itemsWithProducts);
       orderResponse.products.push(...productsResponseWithTotal.productsResponse);
       orderResponse.total = productsResponseWithTotal.total;
       orderResponse.date = order.createdAt;
@@ -34,18 +37,4 @@ export default class RetrieveOrdersFromCustomerUseCase {
     return ordersResponses;
   }
 
-  private makeProductsResponses(itemsWithProducts: ItemWithProduct[]): ProductsResponseWithTotal{
-    let productResponse: ProductResponse;
-    let total = 0;
-    const productsResponse = itemsWithProducts.map((item) => {
-      productResponse = new ProductResponse();
-      productResponse.name = item.product.name;
-      productResponse.price = item.product.price;
-      productResponse.quantity = item.quantity;
-      productResponse.subTotal = (item.product.price * item.quantity);
-      total += productResponse.subTotal;
-      return productResponse;
-    });
-    return { productsResponse, total };
-  }
 }
