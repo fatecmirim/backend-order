@@ -1,7 +1,8 @@
 import App from "./app";
-import { CustomerDb, ProductDb, OrderDb, ItemDb }  from "./models/index";
 
-new App().start().then();
+new App().start().then( async (c) => {
+  
+});
   
   
   //   const CustomerModel = new CustomerDb({

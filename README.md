@@ -12,7 +12,8 @@ The goal of this repository is store all backend of the order pasta backend
 ## Customer Routes
 
 #### Sign up
- - URI: ```/customers/``` 
+```javascript
+ - URI: /customers/ 
  - Method: POST
  - Body: {
     "name":"Some name",
@@ -27,9 +28,10 @@ The goal of this repository is store all backend of the order pasta backend
       "message": "Created"
     }
   }
-
+```
 #### Get All customers
-- URI: ```/customers/```
+```javascript
+- URI: /customers/
 - Method: GET
 - Body: nothing
 - Response: {
@@ -54,9 +56,10 @@ The goal of this repository is store all backend of the order pasta backend
     ]
   }
 }
-
+```
 #### Get customer by email
-- URI: ```/customers/find?email="put email here"```
+```javascript
+- URI: /customers/find?email="put email here"
 - Method: GET
 - Body: nothing
 - qs: email="the email"
@@ -71,9 +74,10 @@ The goal of this repository is store all backend of the order pasta backend
     }
   }
 }
-
+```
 #### Update customer by id
-- URI: ```/customers/:id"```
+```javascript
+- URI: /customers/:id
 - Method: PATCH
 - Body: {
     "name":"rafael jordao jardim",
@@ -94,12 +98,13 @@ The goal of this repository is store all backend of the order pasta backend
     }
   }
 }
-
+```
 ---------------------------------------------------------------------------
 ## Product Routes
 
 #### save
- - URI: ```/products/``` 
+```javascript
+ - URI: /products/
  - Method: POST
  - Body: {
       "name":"massa de pastel",
@@ -114,9 +119,10 @@ The goal of this repository is store all backend of the order pasta backend
       "message": "Created"
     }
   }
-
+```
 #### Get All Products
-- URI: ```/products/```
+```javascript
+- URI: /products/
 - Method: GET
 - Body: nothing
 - Response: {
@@ -140,9 +146,10 @@ The goal of this repository is store all backend of the order pasta backend
     ]
   }
 }
-
-#### Get Product by id 
-- URI: ```/products/:id```
+```
+#### Get Product by id
+```javascript
+- URI: /products/:id
 - Method: GET
 - Body: nothing
 - Response: {
@@ -157,9 +164,10 @@ The goal of this repository is store all backend of the order pasta backend
     }
   }
 }
-
+```
 #### Get Product by name ilike 
-- URI: ```/products/name/?productName=part of product name```
+```javascript
+- URI: /products/name/?productName=part of product name
 - Method: GET
 - Body: nothing
 - Response: {
@@ -174,9 +182,10 @@ The goal of this repository is store all backend of the order pasta backend
     }
   }
 }
-
+```
 #### Update Product by id 
-- URI: ```/products/name/:id```
+```javascript
+- URI: /products/name/:id
 - Method: PATCH
 - Body: {
     {
@@ -199,6 +208,191 @@ The goal of this repository is store all backend of the order pasta backend
     }
   }
 }
+```
+---------------------------------------------------------------------------
+## Order Routes
+
+#### save
+  ```javascript
+ - URI: /orders/
+ - Method: POST
+ - Body: {
+    "customerId": 1,
+    "items": [
+      {
+        "productId": 2,
+        "quantity": 10
+      },
+      {
+        "productId": 3,
+        "quantity": 10
+      }
+    ]
+  }
+  - All fields are required
+  - Response: {
+    "products": [
+        {
+            "name": "massa de cannoli",
+            "price": 2.5,
+            "quantity": 10,
+            "subTotal": 25
+        },
+        {
+            "name": "massa de pizza",
+            "price": 5,
+            "quantity": 10,
+            "subTotal": 50
+        }
+    ],
+    "orderNumber": 55,
+    "total": 75
+  }
+  ```
+
+  #### Retrieve orders by customer id
+  ```javascript
+ - URI: /orders/?customerId=1
+ - Method: GET
+ - Body: no content
+  - Response: [
+    {
+        "products": [
+            {
+                "name": "massa de cannoli",
+                "price": 2.5,
+                "quantity": 1,
+                "subTotal": 2.5
+            },
+            {
+                "name": "massa de pizza",
+                "price": 5,
+                "quantity": 1,
+                "subTotal": 5
+            }
+        ],
+        "orderNumber": 56,
+        "total": 7.5
+    },
+    {
+        "products": [
+            {
+                "name": "massa de cannoli",
+                "price": 2.5,
+                "quantity": 1,
+                "subTotal": 2.5
+            },
+            {
+                "name": "massa de pizza",
+                "price": 5,
+                "quantity": 1,
+                "subTotal": 5
+            }
+        ],
+        "orderNumber": 57,
+        "total": 7.5
+    },
+    {
+        "products": [
+            {
+                "name": "massa de pizza",
+                "price": 5,
+                "quantity": 10,
+                "subTotal": 50
+            },
+            {
+                "name": "massa de cannoli",
+                "price": 2.5,
+                "quantity": 10,
+                "subTotal": 25
+            }
+        ],
+        "orderNumber": 55,
+        "total": 75
+    }
+]
+  ```
+
+  #### Retrieve all orders to adm
+  ```javascript
+ - Just adm user will can retrieve all orders
+ - URI: /orders/all
+ - Method: GET
+ - Body: no content
+  - Response: [
+  {
+    "orderResponse": {
+      "products": [
+        {
+          "name": "massa de cannoli",
+          "price": 2.5,
+          "quantity": 1,
+          "subTotal": 2.5
+        },
+        {
+          "name": "massa de pizza",
+          "price": 5,
+          "quantity": 1,
+          "subTotal": 5
+        }
+      ],
+      "date": "1/2/2020 at 9:55",
+      "orderNumber": 56,
+      "total": 7.5
+    },
+    "customerName": "rafael jordao jardim",
+    "customerPhone": "1999676552"
+  },
+  {
+    "orderResponse": {
+      "products": [
+        {
+          "name": "massa de cannoli",
+          "price": 2.5,
+          "quantity": 1,
+          "subTotal": 2.5
+        },
+        {
+          "name": "massa de pizza",
+          "price": 5,
+          "quantity": 1,
+          "subTotal": 5
+        }
+      ],
+      "date": "1/2/2020 at 10:3",
+      "orderNumber": 57,
+      "total": 7.5
+    },
+    "customerName": "rafael jordao jardim",
+    "customerPhone": "1999676552"
+  },
+  {
+    "orderResponse": {
+      "products": [
+        {
+          "name": "massa de cannoli",
+          "price": 2.5,
+          "quantity": 1,
+          "subTotal": 2.5
+        },
+        {
+          "name": "massa de pizza",
+          "price": 5,
+          "quantity": 1,
+          "subTotal": 5
+        }
+      ],
+      "date": "1/2/2020 at 10:18",
+      "orderNumber": 58,
+      "total": 7.5
+    },
+    "customerName": "rafael jordao jardim",
+    "customerPhone": "1999676552"
+  }
+]
+  ```
+  
+
 
 
 

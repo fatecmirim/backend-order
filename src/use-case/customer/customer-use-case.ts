@@ -20,7 +20,11 @@ export class CustomerUseCase {
   return this.customerRepository.getCustomerByEmail(email);
  }
  
- public updateCustomerById(id: number, params: any) {
+ public updateCustomerById(id: number, params: any): Promise<Customer | null> {
   return this.customerRepository.updateCustomerById(id, params);
+ }
+
+ public getCustomerById(id: number): Promise<Customer> {
+   return this.customerRepository.getCustomerById(id);
  }
 }

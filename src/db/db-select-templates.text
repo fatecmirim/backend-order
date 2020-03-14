@@ -7,3 +7,6 @@ select od.id as order_id, it.product_id, it.quantity, it.sub_total, pd.kg, pd.pr
 from 
 orders as od join items as it on (od.customer_id = 1 and it.order_id = 2)
 join products as pd on (pd.id = it.product_id)
+
+
+select it.quantity, it.sub_total, pd."name", pd.price, pd.kg from items as it join products as pd on (it.product_id = pd.id) where order_id=25 

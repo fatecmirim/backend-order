@@ -1,6 +1,5 @@
 import { ProductUseCase } from "../../use-case/product/product-use-case";
 import { ResponseStatus } from "../../facilities/enums/respose-status";
-import Product from "../../entity/product";
 
 export class ProductController {
   constructor(
