@@ -6,4 +6,5 @@ export default class Customer {
   public phone: string;
   public email: string;
   public password: string;
+  public admin: boolean;
 }

@@ -9,7 +9,8 @@ export class CustomerValidator {
       name: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
-      phone: Joi.string().required(),
+      phone: Joi.string().optional(),
+      admin: Joi.bool().optional()
     });
     Joi.validate({ ...req.body }, schema, (err) => {
       if (err) return next(err);

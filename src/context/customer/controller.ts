@@ -13,7 +13,7 @@ export class CustomerController {
   public async signup(req, res, next): Promise<void>{
     try {
       const params = req.body;
-      const haveAlreadyEmail = await this.customerSignupUseCase.verifyIfHaveEmail(params.email);
+      const haveAlreadyEmail = await this.customerUseCase.verifyIfHaveEmail(params.email);
       if (haveAlreadyEmail) return res.status(ResponseStatus.CONFLICT).json({ message: `The email ${params.email} already exists` });
       const customer = await this.customerSignupUseCase.signup(params);
       if (customer) {
