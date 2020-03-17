@@ -23,4 +23,7 @@ export class CustomerDb extends Model<CustomerDb> {
   @Column({ type: DataTypes.STRING })
   public phone: string;
 
+  @Column({ type: DataTypes.BOOLEAN })
+  public admin: boolean;
+
 }

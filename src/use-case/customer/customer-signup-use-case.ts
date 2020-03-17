@@ -12,8 +12,4 @@ export class CustomerSignupUseCase {
     const { password } = params;
     return this.customerRepository.signup(params);
   }
-
-  public verifyIfHaveEmail(email: string): Promise<boolean> {
-    return this.customerRepository.verifyIfHaveEmail(email);
- }
 }

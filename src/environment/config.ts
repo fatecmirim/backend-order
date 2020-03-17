@@ -3,7 +3,7 @@ dotenv.config();
 const config = {
   database: {
     username: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD || "12345678",
+    password: process.env.DATABASE_PASSWORD,
     name: process.env.DATABASE_NAME,
     host: process.env.DATABASE_HOST,
     dialect: process.env.DATABASE_DIALECT,

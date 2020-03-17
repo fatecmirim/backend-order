@@ -7,8 +7,15 @@ export default class CustomerRepository {
 
   public static returnFromDatabase(row: any) {
     const customer: Customer = new Customer();
+
     if(row["id"]) {
       customer.id = row["id"];
+    }
+    if(row["admin"] != undefined && row["admin"] != null) {      
+      customer.admin = row["admin"];
+    }
+    if(row["password"]) {
+      customer.password = row["password"];
     }
     if(row["name"]) {
       customer.name = row["name"];
@@ -19,6 +26,7 @@ export default class CustomerRepository {
     if(row["phone"]) {
       customer.phone = row["phone"];
     }
+   
     return customer;
   }
 
@@ -44,7 +52,8 @@ export default class CustomerRepository {
 
   public async getCustomerByEmail(email: string): Promise<Customer | null> {
     const customer = await CustomerDb.findOne({ where: { email } });
-    if(customer) {
+    
+    if(customer) {  
       return CustomerRepository.returnFromDatabase(customer);
     }
     return null;

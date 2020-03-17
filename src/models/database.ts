@@ -11,7 +11,7 @@ export default class ConnectionFactory {
   }
 
   public connect(): Sequelize {
-    this.connection = new Sequelize(this.config.database.name, "postgres", this.config.database.password, {
+    this.connection = new Sequelize(this.config.database.name, this.config.database.username, this.config.database.password, {
       host: this.config.database.host,
       dialect: "postgres",
       models: [CustomerDb, OrderDb, ProductDb, ItemDb]
