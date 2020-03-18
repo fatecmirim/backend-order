@@ -6,6 +6,10 @@ The goal of this repository is store all backend of the order pasta backend
 2. You have to run ```npm start```
 3. This application will run on ```http://localhost:3000``` for default
 
+Pay attention: After login All calling will need the token
+header: {
+  Authorization: Bearer yourToken
+}
 ### Routes
 #### You have to send request to ```http://localhost:3000/api/${something}/
 ---------------------------------------------------------------------------
@@ -391,7 +395,22 @@ The goal of this repository is store all backend of the order pasta backend
   }
 ]
   ```
-  
+  #### Login
+  ```javascript
+ - all people can login
+ - URI: /api/login
+ - Method: POST
+ - Body: {
+	  email: "email",
+	  password: "12345678"
+  }
+  - Response: 
+    {
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1ODQ1NzIyNDMsImV4cCI6MTU4NDU3NTg0M30.WJu9jP-1AlwpYkT75fA7WWxWN3mSqFh7CWM0iTXFXFk",
+      admin: false
+    }
+  ```
+
 
 
 

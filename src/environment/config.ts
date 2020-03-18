@@ -8,7 +8,8 @@ const config = {
     host: process.env.DATABASE_HOST,
     dialect: process.env.DATABASE_DIALECT,
     port: process.env.DATABASE_PORT
-  }
+  },
+  secretKeyToken: process.env.SECRET_KEY_TOKEN || ""
 }
 
 export default config;
