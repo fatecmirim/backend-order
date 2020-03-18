@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 import config from "./environment/config";
 import ConnectionFactory from "./models/database";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 export default class App {
 
@@ -18,6 +19,7 @@ export default class App {
 
   private middlewares(): void {
     this.app.use(bodyParser.json());
+    this.app.use(cors());
   }
 
   private async connectDatabase(): Promise<void> {
