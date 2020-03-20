@@ -9,7 +9,7 @@ const router = express.Router();
 
 
 router.use("/health", HealthRouter);
-router.use("/customers", validateToken, CustomerRouter);
+router.use("/customers", CustomerRouter);
 router.use("/products", validateToken, ProductRouter)
 router.use("/orders", validateToken, OrderRouter);
 router.use("/login", LoginRouter);

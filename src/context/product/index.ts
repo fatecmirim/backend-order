@@ -2,9 +2,10 @@ import express from "express";
 const router = express.Router();
 import { ProductController } from "./controller";
 import { ProductValidator } from "./validator";
+import { validateAdmin } from "../../middlewares/validateAdmin";
 const controller = new ProductController();
 
-router.post("/", ProductValidator.validateSaveProduct, (req, res, next) => {
+router.post("/", validateAdmin,ProductValidator.validateSaveProduct, (req, res, next) => {
   controller.save(req, res, next);
 });
 
@@ -24,7 +25,7 @@ router.get("/:id", (req, res, next) => {
   controller.getProductById(req, res, next);
 });
 
-router.patch("/:id", ProductValidator.validateUpdateProductById, (req, res, next) => {
+router.patch("/:id", validateAdmin, ProductValidator.validateUpdateProductById, (req, res, next) => {
   controller.updateProductById(req, res, next);
 });
 

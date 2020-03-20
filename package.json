@@ -7,7 +7,7 @@
     "build": "tsc --project tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "npm run build && sequelize db:migrate",
-    "start": "nodemon dist/server.js"
+    "start": "node dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -46,7 +46,6 @@
     "@types/joi": "^14.3.4",
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
-    "nodemon": "^2.0.2",
     "sequelize-cli": "^5.5.1"
   }
 }
