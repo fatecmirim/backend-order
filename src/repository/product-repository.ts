@@ -1,7 +1,8 @@
 import { IParamsProduct } from "src/facilities/interfaces/i-params-product";
 import Product from "../entity/product";
 import { ProductDb, PhotoDb } from "../models";
-import sequelize = require("sequelize");
+import { Op } from "sequelize";
+import PhotoRepository from "./photo-repository";
 
 export class ProductRepository {
   constructor() { }
@@ -23,8 +24,8 @@ export class ProductRepository {
     if (row["stock"]) {
       product.stock = row["stock"];
     }
-    if (row["photo_id"]) {
-      product.photoId = row["photo_id"];
+    if (row["photo"]) {
+      product.photoUrl = PhotoRepository.returnFromDatabase(row["photo"]).url;
     }
     return product;
   }
@@ -44,6 +45,8 @@ export class ProductRepository {
 
   public async getAllProduct(): Promise<Product[]> {
     const products = await ProductDb.findAll({ include: [PhotoDb] });
+    console.log(products);
+    
     if (!products.length) return [];
     return products.map((product) => ProductRepository.returnFromDatabase(product));
   }
@@ -56,7 +59,7 @@ export class ProductRepository {
 
   public async getProductByNameIlike(productName: string): Promise<Product[]> {
     const products =
-      await ProductDb.sequelize?.query(`SELECT * FROM products as pd WHERE NAME ILIKE '%${productName}%' join photos as pt (pd.photo_id = pt.id);`, { type: sequelize.QueryTypes.SELECT });
+      await ProductDb.findAll({ where: { name: { [Op.iLike]: `%${productName}%` } }, include: [PhotoDb] })
 
     if (!products) return [];
     return products.map((product) => ProductRepository.returnFromDatabase(product));

@@ -1,3 +1,5 @@
+import Photo from "./photo";
+
 export default class Product {
 
   constructor() {}
@@ -6,5 +8,5 @@ export default class Product {
   public price: number;
   public kg: number;
   public stock: number;
-  public photoId: number;
+  public photoUrl: string;
 }

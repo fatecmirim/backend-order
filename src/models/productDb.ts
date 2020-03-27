@@ -1,7 +1,6 @@
-import { Model, Column, Table, ForeignKey, HasOne } from "sequelize-typescript";
+import { Model, Column, Table, ForeignKey, HasOne, BelongsTo } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import { PhotoDb } from "./photoDb";
-import Photo from "../entity/photo";
 
 @Table({ tableName: "products" })
 export class ProductDb extends Model<ProductDb> {
@@ -27,5 +26,8 @@ export class ProductDb extends Model<ProductDb> {
   @ForeignKey(() => PhotoDb)
   @Column({type: DataTypes.INTEGER, field: "photo_id"})
   public photoId;
+
+  @BelongsTo(() => PhotoDb, {foreignKey: "photoId"})
+  photo: PhotoDb;
 
 }

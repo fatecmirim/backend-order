@@ -1,7 +1,6 @@
 import { Model, Column, Table, BelongsTo } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import config from "../environment/config";
-import { ProductDb } from "./productDb";
 
 @Table({ tableName: "photos" })
 export class PhotoDb extends Model<PhotoDb> {
