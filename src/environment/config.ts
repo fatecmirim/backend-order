@@ -9,7 +9,11 @@ const config = {
     dialect: process.env.DATABASE_DIALECT,
     port: process.env.DATABASE_PORT
   },
-  secretKeyToken: process.env.SECRET_KEY_TOKEN || ""
+  secretKeyToken: process.env.SECRET_KEY_TOKEN || "",
+  backend: {
+    host: process.env.BACKEND_HOST,
+    port: process.env.BACKEND_PORT
+  }
 }
 
 export default config;

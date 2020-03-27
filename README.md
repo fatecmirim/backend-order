@@ -410,7 +410,23 @@ header: {
       admin: false
     }
   ```
+#### Photo
+  ```javascript
+ - Just adm user will can retrieve all orders
+ - URI: /photos
+ - Method: POST
+ - Body: {
+   form-data with name "photo"
+  }
+  - Response: {
+    "id": {
+        "id": 9,
+        "path": "c1f14f11fc18769c1a928b76e7f975a7c265ce0301d55c1459dd035304845e97.jpeg",
+        "url": "http:localhost:3000/api/public/c1f14f11fc18769c1a928b76e7f975a7c265ce0301d55c1459dd035304845e97.jpeg"
+    }
+  }
 
+  ```
 
 
 

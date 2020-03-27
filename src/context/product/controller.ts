@@ -8,7 +8,7 @@ export class ProductController {
 
   public async save(req, res, next): Promise<void> {
     try {
-      const params: {name, price, kg, stock } = req.body;
+      const params: {name, price, kg, stock, photoId } = req.body;
       const product = await this.productUseCase.save(params);
       if (product) {
         return res.status(ResponseStatus.CREATED).json({ message: `Created` });

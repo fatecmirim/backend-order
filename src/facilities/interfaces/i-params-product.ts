@@ -3,4 +3,5 @@ export interface IParamsProduct {
   price: number;
   kg: number;
   stock: number;
+  photoId: number;
 }

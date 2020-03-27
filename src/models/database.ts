@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import {CustomerDb, OrderDb, ProductDb, ItemDb} from "./index";
+import { PhotoDb } from "./photoDb";
 
 
 export default class ConnectionFactory {
@@ -14,7 +15,7 @@ export default class ConnectionFactory {
     this.connection = new Sequelize(this.config.database.name, this.config.database.username, this.config.database.password, {
       host: this.config.database.host,
       dialect: "postgres",
-      models: [CustomerDb, OrderDb, ProductDb, ItemDb]
+      models: [CustomerDb, OrderDb, ProductDb, ItemDb, PhotoDb]
     });
     return this.connection;
   }
@@ -31,7 +32,7 @@ export default class ConnectionFactory {
 
   public buildModels(sequelize: Sequelize): void {
     sequelize.addModels([
-      CustomerDb, OrderDb, ProductDb, ItemDb
+      CustomerDb, OrderDb, ProductDb, ItemDb, PhotoDb
     ]);
   }
 }

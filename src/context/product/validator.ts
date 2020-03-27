@@ -10,6 +10,7 @@ export class ProductValidator {
       price: Joi.number().positive().required(),
       kg: Joi.number().positive().required(),
       stock: Joi.number().positive().integer().required(),
+      photoId: Joi.number().positive().integer().required()
     });
     Joi.validate({ ...req.body }, schema, (err) => {
       if (err) return next(err);

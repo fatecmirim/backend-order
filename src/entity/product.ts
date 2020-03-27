@@ -6,4 +6,5 @@ export default class Product {
   public price: number;
   public kg: number;
   public stock: number;
+  public photoId: number;
 }

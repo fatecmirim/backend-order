@@ -1,10 +1,10 @@
 import { IParamsProduct } from "src/facilities/interfaces/i-params-product";
 import Product from "../entity/product";
-import { ProductDb } from "../models";
+import { ProductDb, PhotoDb } from "../models";
 import sequelize = require("sequelize");
 
 export class ProductRepository {
-  constructor() {}
+  constructor() { }
 
   public static returnFromDatabase(row: any) {
     const product: Product = new Product();
@@ -23,45 +23,48 @@ export class ProductRepository {
     if (row["stock"]) {
       product.stock = row["stock"];
     }
+    if (row["photo_id"]) {
+      product.photoId = row["photo_id"];
+    }
     return product;
   }
 
   public async save(params: IParamsProduct): Promise<Product> {
-    const {kg, stock, name, price} = params;
+    const { kg, stock, name, price, photoId} = params;
     const product = new ProductDb({
       kg: kg.toFixed(2),
       stock,
       name,
-      price: price.toFixed(2)
+      price: price.toFixed(2),
+      photoId
     });
     const productSaved = await product.save();
     return ProductRepository.returnFromDatabase(productSaved);
   }
 
   public async getAllProduct(): Promise<Product[]> {
-    const products = await ProductDb.findAll();
-    if(!products.length) return [];
+    const products = await ProductDb.findAll({ include: [PhotoDb] });
+    if (!products.length) return [];
     return products.map((product) => ProductRepository.returnFromDatabase(product));
   }
 
   public async getProductById(productId: number): Promise<Product | null> {
-    const product = await ProductDb.findByPk(productId);
+    const product = await ProductDb.findByPk(productId, { include: [PhotoDb] });
     if (!product) return null;
     return ProductRepository.returnFromDatabase(product);
   }
 
   public async getProductByNameIlike(productName: string): Promise<Product[]> {
-    const products = 
-    await ProductDb.sequelize?.query(`SELECT * FROM products WHERE NAME ILIKE '%${productName}%';`, { type: sequelize.QueryTypes.SELECT });
-    console.log(products);
-    
+    const products =
+      await ProductDb.sequelize?.query(`SELECT * FROM products as pd WHERE NAME ILIKE '%${productName}%' join photos as pt (pd.photo_id = pt.id);`, { type: sequelize.QueryTypes.SELECT });
+
     if (!products) return [];
     return products.map((product) => ProductRepository.returnFromDatabase(product));
   }
 
   public async updateProductById(productId: number, params: IParamsProduct): Promise<Product | null> {
     const product = await ProductDb.findByPk(productId);
-    if(!product) return null;
+    if (!product) return null;
     product.name = params.name || product.name;
     product.price = params.price || product.price;
     product.stock = params.stock || product.stock;

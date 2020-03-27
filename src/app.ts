@@ -5,6 +5,7 @@ import config from "./environment/config";
 import ConnectionFactory from "./models/database";
 import bodyParser from "body-parser";
 import cors from "cors";
+import path from "path";
 
 export default class App {
 
@@ -19,6 +20,7 @@ export default class App {
 
   private middlewares(): void {
     this.app.use(bodyParser.json());
+    this.app.use('/api/public', express.static(path.resolve(__dirname, "tmp", "uploads")));
     this.app.use(cors());
   }
 
@@ -33,7 +35,7 @@ export default class App {
   }
 
   public async start(): Promise<void> {
-    this.app.listen(3000, () => {
+    this.app.listen(3001, () => {
       console.log(`The server is running on port ${3000}`);
       return Promise.resolve();
     });
