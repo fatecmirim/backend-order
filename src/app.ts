@@ -20,8 +20,8 @@ export default class App {
 
   private middlewares(): void {
     this.app.use(bodyParser.json());
-    this.app.use('/api/public', express.static(path.resolve(__dirname, "tmp", "uploads")));
     this.app.use(cors());
+    this.app.use('/api/public', express.static(path.resolve(__dirname, "tmp", "uploads")));
   }
 
   private async connectDatabase(): Promise<void> {
