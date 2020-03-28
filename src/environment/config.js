@@ -1,4 +1,4 @@
-import * as dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config();
 const config = {
   database: {
@@ -16,4 +16,4 @@ const config = {
   }
 }
 
-export default config;
+module.exports = config;
