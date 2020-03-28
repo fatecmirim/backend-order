@@ -35,8 +35,8 @@ export default class App {
   }
 
   public async start(): Promise<void> {
-    this.app.listen(3001, () => {
-      console.log(`The server is running on port ${3000}`);
+    this.app.listen(config.backend.port, () => {
+      console.log(`The server is running on port ${config.backend.port}`);
       return Promise.resolve();
     });
   }
