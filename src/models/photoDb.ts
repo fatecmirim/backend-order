@@ -17,7 +17,7 @@ export class PhotoDb extends Model<PhotoDb> {
 
   @Column(DataTypes.VIRTUAL(DataTypes.STRING))
   get url(this: PhotoDb): string {
-    return `http:${config.backend.host}:${config.backend.port}/api/public/${this.path}`;
+    return `http://${config.backend.host}:${config.backend.port}/api/public/${this.path}`;
   }
 
  
