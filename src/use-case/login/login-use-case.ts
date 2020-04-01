@@ -15,8 +15,8 @@ export default class LoginUseCase {
     
     if (this.verifyPassword(password, user)) {
       const token = jwt.sign({ email: user.email, admin: user.admin },
-        config.secretKeyToken, { expiresIn: "1h" });
-      return { token, admin: user.admin };
+        config.secretKeyToken);
+      return { token, admin: user.admin, id: user.id };
     } else {
       throw { message: "Email ou senha incorretos"};
     }
