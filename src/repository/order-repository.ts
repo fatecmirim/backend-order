@@ -15,7 +15,7 @@ export default class OrderRepository {
     }
     if(row["createdAt"]) {
       const date = new Date(row["createdAt"]);
-      order.createdAt = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()} at ${date.getHours()}:${date.getMinutes()}`;    
+      order.createdAt = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()}`;    
     }
     return order;
   }
@@ -47,6 +47,15 @@ export default class OrderRepository {
     if(!orders) return [];
 
     return orders.map((order) => OrderRepository.returnFromDatabase(order));
+  }
+
+  public async acceptOrderFromCustomer(id: number): Promise<void> {
+    const order = await OrderDb.findByPk(id);
+    if(!order) {
+      throw new Error("Fail updating the order status");
+    }
+    order.accepted = true;
+    await order.save();
   }
 
 }

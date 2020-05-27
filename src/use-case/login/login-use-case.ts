@@ -10,9 +10,10 @@ export default class LoginUseCase {
   ) {}
 
   public async login(email: string, password: string): Promise<any> {
+    
     const user = await this.customerUseCase.getCustomerByEmail(email);
     if(!user) throw { message: "Email ou senha incorretos"};
-    
+
     if (this.verifyPassword(password, user)) {
       const token = jwt.sign({ email: user.email, admin: user.admin },
         config.secretKeyToken);

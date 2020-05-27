@@ -60,14 +60,18 @@ export default class OrderUseCase {
     orderResponse.orderNumber = orderId;
     orderResponse.total = total;
     console.log(orderResponse);
-    
-    return orderResponse;    
+
+    return orderResponse;
+  }
+
+  public acceptOrderFromCustomer(id: number): Promise<void> {
+    return this.orderRepository.acceptOrderFromCustomer(id);
   }
 
   private async verifyIfExistStockToAllProducts(items: any): Promise<boolean> {
     let response = true;
     const resultBooleand = await Promise.all(items.map(async (item) => {
-      let itemHasStock = this.productUseCase.verifyProductStock(item.productId, item.quantity);
+      let itemHasStock = await this.productUseCase.verifyProductStock(item.productId, item.quantity);
       return itemHasStock;
     }));
     resultBooleand.forEach((result) => {

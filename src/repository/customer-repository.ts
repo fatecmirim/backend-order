@@ -1,6 +1,7 @@
 import { CustomerDb } from "../models";
 import { IParamsCustomer } from "../facilities/interfaces/i-params-customer";
 import Customer from "../entity/customer";
+import Crypto from "../utils/crypto";
 
 export default class CustomerRepository {
   constructor() { }
@@ -63,7 +64,7 @@ export default class CustomerRepository {
     const customer = await CustomerDb.findByPk(id);
     if(customer) {
       customer.name = params.name || customer.name;
-      customer.password = params.password || customer.password;
+      customer.password = new Crypto().crypt(params.password) || customer.password;
       customer.phone = params.phone || customer.phone;
       customer.email = params.email || customer.email;
       const customerUpdated = await customer.save();

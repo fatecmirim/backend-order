@@ -19,4 +19,19 @@ export default class PhotoController {
       return res.status(ResponseStatus.SERVER_ERROR).json(error);
     }
   }
+
+  public async uploadPhoto(req, res, next): Promise<void> {
+    const { filename } = req.file;
+    const id = req.params.id;
+    console.log(`Uploading photo ${filename}`);
+    try {
+      const response = await this.photoUseCase.upload(filename, id);
+      if (response) {
+        return res.status(ResponseStatus.SUCCESS).json({ photo: response });
+      }
+      return res.status(ResponseStatus.BAD_REQUEST).json();
+    } catch (error) {
+      return res.status(ResponseStatus.SERVER_ERROR).json(error);
+    }
+  }
 }

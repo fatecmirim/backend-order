@@ -18,4 +18,8 @@ router.get("/all", validateAdmin,(req, res, next) => {
   controller.retrieveAllOrders(req, res, next);
 });
 
+router.put("/accepts/:id", validateAdmin,(req, res, next) => {
+  controller.acceptOrderFromCustomer(req, res, next);
+});
+
 export default router;

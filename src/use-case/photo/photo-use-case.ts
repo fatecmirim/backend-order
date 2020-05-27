@@ -10,4 +10,8 @@ export class PhotoUseCase {
   public async save(filename: string): Promise<Photo>{
     return this.photoRepository.save(filename);
   }
+
+  public async upload(filename: string, id: number): Promise<Photo> {
+    return this.photoRepository.upload(filename, id);
+  }
 }

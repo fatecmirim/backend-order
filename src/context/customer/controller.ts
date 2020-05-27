@@ -43,7 +43,7 @@ export class CustomerController {
       if (!email) return res.status(ResponseStatus.BAD_REQUEST).json("Provide the email");
       const customer = await this.customerUseCase.getCustomerByEmail(email);
       if (customer) {
-        return res.status(ResponseStatus.SUCCESS).json(customer);
+        return res.status(ResponseStatus.SUCCESS).json(this.customerUseCase.customerResponse(customer));
       }
       return res.status(ResponseStatus.NOT_FOUND).json();
     } catch (error) {

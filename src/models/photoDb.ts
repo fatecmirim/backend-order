@@ -1,4 +1,4 @@
-import { Model, Column, Table, BelongsTo } from "sequelize-typescript";
+import { Model, Column, Table } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import config from "../environment/config";
 
@@ -16,7 +16,7 @@ export class PhotoDb extends Model<PhotoDb> {
   public path;
 
   @Column(DataTypes.VIRTUAL(DataTypes.STRING))
-  get url(this: PhotoDb): string {
+  get url(): string {
     return `http://${config.backend.host}:${config.backend.port}/api/public/${this.path}`;
   }
 

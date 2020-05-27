@@ -15,4 +15,6 @@ export class OrderDb extends Model<OrderDb> {
   @Column({type: DataTypes.INTEGER})
   public customer_id;
 
+  @Column({type: DataTypes.BOOLEAN})
+  public accepted: boolean;
 }

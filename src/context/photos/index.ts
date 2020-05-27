@@ -9,5 +9,8 @@ router.post("/", upload.single('photo'), (req, res, next) => {
   controller.savePhoto(req, res, next);
 });
 
+router.put("/:id", upload.single('photo'), (req, res, next) => {
+  controller.uploadPhoto(req, res, next);
+});
 
 export default router;
