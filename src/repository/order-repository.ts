@@ -17,6 +17,9 @@ export default class OrderRepository {
       const date = new Date(row["createdAt"]);
       order.createdAt = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()}`;    
     }
+    if(row["accepted"]) {
+      order.accepted = row["accepted"];
+    }
     return order;
   }
 
@@ -37,13 +40,9 @@ export default class OrderRepository {
   }
 
   public async retrieveAllOrders(): Promise<Order[]> {
-    const date = new Date();
-    date.setHours(6, 0, 0 ,0);
-    const orders = await OrderDb.findAll({
-      where: {
-        createdAt: { [Op.gt]: date }
-      }
-    });
+    // const date = new Date();
+    // date.setHours(6, 0, 0 ,0);
+    const orders = await OrderDb.findAll();
     if(!orders) return [];
 
     return orders.map((order) => OrderRepository.returnFromDatabase(order));
