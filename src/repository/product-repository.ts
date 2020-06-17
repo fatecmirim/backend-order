@@ -26,6 +26,7 @@ export class ProductRepository {
     }
     if (row["photo"]) {
       product.photoUrl = PhotoRepository.returnFromDatabase(row["photo"]).url;
+      product.photoId = PhotoRepository.returnFromDatabase(row["photo"]).id;
     }
     return product;
   }

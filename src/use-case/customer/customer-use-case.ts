@@ -7,7 +7,7 @@ export class CustomerUseCase {
     private readonly customerRepository: CustomerRepository = new CustomerRepository()
   ) {}
 
- customerResponse(customer: Customer) {
+ public customerResponse(customer: Customer) {
     delete customer.password;
     return customer;
   }
@@ -33,5 +33,9 @@ export class CustomerUseCase {
  public async getCustomerById(id: number): Promise<Customer> {
    const customer = await this.customerRepository.getCustomerById(id);
    return this.customerResponse(customer);
+ }
+
+ public getCustomerByOrderId(orderId: number): Promise<Customer> {
+   return this.customerRepository.getCustomerByOrderId(orderId);
  }
 }

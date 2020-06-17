@@ -40,6 +40,7 @@ export default class RetrieveOrdersToAdmin extends RetrieveOrderUseCase {
       orderResponse.orderNumber = orderWithCustomer.order.id;
       orderResponse.products = productsResponsesWithTotal.productsResponse;
       orderResponse.total = productsResponsesWithTotal.total;
+      orderResponse.accepted = orderWithCustomer.order.accepted;
       customerOrderInformation.orderResponse = orderResponse;
       return customerOrderInformation;
     }));

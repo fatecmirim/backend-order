@@ -1,8 +1,8 @@
-import { CustomerDb } from "../models";
+import { CustomerDb, OrderDb } from "../models";
 import { IParamsCustomer } from "../facilities/interfaces/i-params-customer";
 import Customer from "../entity/customer";
 import Crypto from "../utils/crypto";
-
+import OrderRepository from "../repository/order-repository";
 export default class CustomerRepository {
   constructor() { }
 
@@ -75,6 +75,16 @@ export default class CustomerRepository {
 
   public async getCustomerById(id: number): Promise<Customer> {
     const customer = await CustomerDb.findByPk(id);
+    return CustomerRepository.returnFromDatabase(customer);
+  }
+
+  public async getCustomerByOrderId(orderId): Promise<Customer> {
+    const orderDb = await OrderDb.findByPk(orderId);
+    if (!orderDb) {
+      throw new Error("Fail getting the customer");
+    }
+    const order = OrderRepository.returnFromDatabase(orderDb);
+    const customer = await CustomerDb.findByPk(order.customerId);
     return CustomerRepository.returnFromDatabase(customer);
   }
 }

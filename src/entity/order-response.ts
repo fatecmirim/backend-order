@@ -8,4 +8,5 @@ export default class OrderResponse {
   public products: ProductResponse[];
   public total: number;
   public date: string;
+  public accepted?: boolean;
 }

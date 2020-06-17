@@ -4,5 +4,5 @@ export default class Order {
   public id: number;
   public customerId: number;
   public createdAt: string;
-  public accepted: boolean;
+  public accepted?: boolean;
 }

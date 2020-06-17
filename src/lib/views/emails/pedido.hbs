@@ -1,0 +1,33 @@
+<strong>Olá {{customer.name}}</strong>
+
+<br />
+
+<h3>Seu pedido {{order.orderNumber}} já está pronto para retirada!</h3>
+
+<div>
+  <p>Segue os dados do pedido</p>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Quantidade</th>
+        <th>Preço</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each order.products}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.quantity}}</td>
+        <td>{{price}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <td></td>
+      <td><strong>Total</strong></td>
+      <td>R$ {{order.total}}</td>
+    </tfoot>
+  </table>
+</div>
