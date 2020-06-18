@@ -25,6 +25,10 @@ router.get("/:id", (req, res, next) => {
   controller.getProductById(req, res, next);
 });
 
+router.delete("/:id", (req, res, next) => {
+  controller.deleteProductById(req, res, next);
+});
+
 router.patch("/:id", validateAdmin, ProductValidator.validateUpdateProductById, (req, res, next) => {
   controller.updateProductById(req, res, next);
 });

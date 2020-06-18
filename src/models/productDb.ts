@@ -1,8 +1,8 @@
 import { Model, Column, Table, ForeignKey, HasOne, BelongsTo } from "sequelize-typescript";
-import { DataTypes } from "sequelize";
+import { DataTypes, Paranoid } from "sequelize";
 import { PhotoDb } from "./photoDb";
 
-@Table({ tableName: "products" })
+@Table({ tableName: "products", paranoid: true })
 export class ProductDb extends Model<ProductDb> {
   @Column({
     autoIncrement: true,
@@ -29,5 +29,4 @@ export class ProductDb extends Model<ProductDb> {
 
   @BelongsTo(() => PhotoDb, {foreignKey: "photoId"})
   photo: PhotoDb;
-
 }

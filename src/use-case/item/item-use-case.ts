@@ -11,7 +11,7 @@ export default class ItemUseCase {
 
   public async getProductsFromItems(items: Item[]): Promise<ItemWithProduct[]> {
     const itemsWithProduct = items.map(async (item) => {
-      const product = await this.productUseCase.getProductById(item.productId);
+      const product = await this.productUseCase.getProductById(item.productId, false);
       return { product, quantity: item.quantity} as ItemWithProduct;
     });
     if(!itemsWithProduct) return [];    

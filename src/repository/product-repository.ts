@@ -52,8 +52,8 @@ export class ProductRepository {
     return products.map((product) => ProductRepository.returnFromDatabase(product));
   }
 
-  public async getProductById(productId: number): Promise<Product | null> {
-    const product = await ProductDb.findByPk(productId, { include: [PhotoDb] });
+  public async getProductById(productId: number, paranoid: boolean = true): Promise<Product | null> {
+    const product = await ProductDb.findByPk(productId, { include: [PhotoDb] , paranoid});
     if (!product) return null;
     return ProductRepository.returnFromDatabase(product);
   }
@@ -89,6 +89,13 @@ export class ProductRepository {
     if (product) {
       (product.stock - quantity) < 0 ? product.stock = 0 : product.stock = (product.stock - quantity);
       await product.save();
+    }
+  }
+
+  public async deleteProduct(productId: number): Promise<void> {
+    const product = await ProductDb.findByPk(productId);
+    if (product) {
+      await product.destroy();
     }
   }
 }

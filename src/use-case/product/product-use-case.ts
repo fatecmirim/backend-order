@@ -15,8 +15,8 @@ export class ProductUseCase {
     return this.productRepository.getAllProduct();
   }
 
-  public async getProductById(productId: number): Promise<Product | null> {
-    return this.productRepository.getProductById(productId);
+  public async getProductById(productId: number, paranoid: boolean = true): Promise<Product | null> {
+    return this.productRepository.getProductById(productId, paranoid);
   }
 
   public async getProductByNameIlike(productName: string): Promise<Product[]> {
@@ -31,7 +31,13 @@ export class ProductUseCase {
     return this.productRepository.verifyProductStock(id, quantity);
   }
 
-  public async updateStock(productId: number, quantity): Promise<void> {
+  public async updateStock(productId: number, quantity: number): Promise<void> {
     return this.productRepository.updateStock(productId, quantity);
   }
+
+  public async deleteProductById(productId: number): Promise<void> {
+    return this.productRepository.deleteProduct(productId);
+  }
+
+  
 }

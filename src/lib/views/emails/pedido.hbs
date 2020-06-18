@@ -1,11 +1,12 @@
-<strong>Olá {{customer.name}}</strong>
+<strong>Olá {{customer.name}},</strong>
 
 <br />
 
-<h3>Seu pedido {{order.orderNumber}} já está pronto para retirada!</h3>
+<h3>Seu pedido já está pronto para retirada!</h3>
 
 <div>
-  <p>Segue os dados do pedido</p>
+  <h4>Segue os dados do pedido:</h4>
+  <p>Número do pedido: <strong>{{order.orderNumber}}</strong></p>
   <table border="1">
     <thead>
       <tr>
@@ -20,7 +21,7 @@
       <tr>
         <td>{{this.name}}</td>
         <td>{{this.quantity}}</td>
-        <td>{{price}}</td>
+        <td>R$ {{price}}</td>
       </tr>
       {{/each}}
     </tbody>

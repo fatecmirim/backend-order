@@ -3,8 +3,8 @@ export default {
   port: '465',
   secure: 'true',
   auth: {
-      user: 'rafaeljardim22@gmail.com',
-      pass: '010612rafael'
+      user: 'put the user',
+      pass: 'put password '
   },
   default: {
       from: 'Equipe de desenvolvimento <jordao.jardim@hotmail.com.br>'

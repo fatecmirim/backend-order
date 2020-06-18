@@ -27,7 +27,7 @@ export default class OrderRepository {
     const order = new OrderDb({
       customer_id: customerId
     });
-    const orderSaved = await order.save();    
+    const orderSaved = await order.save();
     return OrderRepository.returnFromDatabase(orderSaved);
   }
 
@@ -40,11 +40,8 @@ export default class OrderRepository {
   }
 
   public async retrieveAllOrders(): Promise<Order[]> {
-    // const date = new Date();
-    // date.setHours(6, 0, 0 ,0);
     const orders = await OrderDb.findAll();
     if(!orders) return [];
-
     return orders.map((order) => OrderRepository.returnFromDatabase(order));
   }
 

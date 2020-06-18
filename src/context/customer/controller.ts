@@ -51,6 +51,20 @@ export class CustomerController {
     }
   }
 
+  public async getCustomerById(req, res, next): Promise<void> {
+    try {
+      const { id } = req.params;
+      if (!id) return res.status(ResponseStatus.BAD_REQUEST).json("Provide the id");
+      const customer = await this.customerUseCase.getCustomerById(id);
+      if (customer) {
+        return res.status(ResponseStatus.SUCCESS).json(this.customerUseCase.customerResponse(customer));
+      }
+      return res.status(ResponseStatus.NOT_FOUND).json();
+    } catch (error) {
+      this.sendServerError(res, error);
+    }
+  }
+
   public async updateCustomerById(req, res, next): Promise<void> {
     try {
       const { id } = req.params;

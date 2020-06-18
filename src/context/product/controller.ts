@@ -62,6 +62,16 @@ export class ProductController {
     }
   }
 
+  public async deleteProductById(req, res, next): Promise<void> {
+    try {
+      const { id } = req.params;
+      await this.productUseCase.deleteProductById(id);
+      return res.status(ResponseStatus.SUCCESS).json();
+    } catch (error) {
+      this.sendServerError(res, error);
+    }
+  }
+
   public async verifyProductStock(req, res, next): Promise<void> {
     try {
       const { id, quantity } = req.query;
@@ -73,7 +83,7 @@ export class ProductController {
   }
 
   private sendServerError(res, error?): void{
-    let message = error.message || { message: `Something went wrong` };
+    const message = error.message || { message: `Something went wrong` };
     return res.status(ResponseStatus.SERVER_ERROR).json(message);
   }
 }
