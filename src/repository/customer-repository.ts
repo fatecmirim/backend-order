@@ -16,7 +16,7 @@ export default class CustomerRepository {
       customer.admin = row["admin"];
     }
     if(row["password"]) {
-      customer.password = row["password"];
+      customer.password = new Crypto().decrypt(row["password"]);
     }
     if(row["name"]) {
       customer.name = row["name"];
