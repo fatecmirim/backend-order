@@ -23,7 +23,7 @@ router.get("/find", validateToken, validateAdmin, (req, res, next) => {
 });
 
 
-router.patch("/:id", validateToken, CustomerValidator.validateUpdate, (req, res, next) => {
+router.patch("/:id", CustomerValidator.validateUpdate, (req, res, next) => {
   controller.updateCustomerById(req, res, next);
 });
 

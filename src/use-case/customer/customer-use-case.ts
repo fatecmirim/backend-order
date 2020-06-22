@@ -27,12 +27,12 @@ export class CustomerUseCase {
  
  public async updateCustomerById(id: number, params: any): Promise<Customer | null> {
   const customer = await this.customerRepository.updateCustomerById(id, params);
-  return customer ? this.customerResponse(customer) : null;
+  return customer;
  }
 
  public async getCustomerById(id: number): Promise<Customer> {
    const customer = await this.customerRepository.getCustomerById(id);
-   return this.customerResponse(customer);
+   return customer;
  }
 
  public getCustomerByOrderId(orderId: number): Promise<Customer> {
