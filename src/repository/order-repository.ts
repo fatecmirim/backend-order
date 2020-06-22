@@ -17,9 +17,7 @@ export default class OrderRepository {
       const date = new Date(row["createdAt"]);
       order.createdAt = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()}`;    
     }
-    if(row["accepted"]) {
-      order.accepted = row["accepted"];
-    }
+     order.accepted = row["accepted"];
     return order;
   }
 
