@@ -1,5 +1,6 @@
 import CustomerRepository from "../../repository/customer-repository";
-import Customer from "src/entity/customer";
+import Customer from "../../entity/customer";
+import Crypto from "../../utils/crypto";
 
 export class CustomerUseCase {
 
@@ -32,6 +33,8 @@ export class CustomerUseCase {
 
  public async getCustomerById(id: number): Promise<Customer> {
    const customer = await this.customerRepository.getCustomerById(id);
+  const decrypted = new Crypto().decrypt(customer.password || "");
+   customer.password = decrypted;
    return customer;
  }
 
