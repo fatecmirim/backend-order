@@ -10,7 +10,7 @@ router.post("/", CustomerValidator.validateSignUp, (req, res, next) => {
   controller.signup(req, res, next);
 });
 
-router.get("/:id", validateToken, validateAdmin, (req, res, next) => {
+router.get("/:id", validateAdmin, (req, res, next) => {
   controller.getCustomerById(req, res, next);
 });
 
