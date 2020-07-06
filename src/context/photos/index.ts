@@ -9,7 +9,7 @@ router.post("/", upload.single('photo'), (req, res, next) => {
   controller.savePhoto(req, res, next);
 });
 
-router.patch("/:id", upload.single('photo'), (req, res, next) => {
+router.patch("/:id", (req, res, next) => {
   controller.uploadPhoto(req, res, next);
 });
 

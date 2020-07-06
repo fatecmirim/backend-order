@@ -1,5 +1,6 @@
 import { PhotoDb } from "../models";
 import Photo from "../entity/photo";
+import { ProductDb } from "../models/productDb";
 
 export default class PhotoRepository {
   constructor() { }
@@ -25,11 +26,15 @@ export default class PhotoRepository {
     throw new Error("Error saving photo");
   }
 
-  public async upload(filename: string, id: number): Promise<Photo> {
-    await PhotoDb.update({ path: filename }, { where: { id } });
-    const photoUpdated = await PhotoDb.findByPk(id);
-    if (photoUpdated) {
-      return PhotoRepository.returnFromDatabase(photoUpdated);
+  public async upload(newId: number, id: number): Promise<Photo> {
+    const products = await ProductDb.findAll({ where: {photoId: id}});
+    if (products) {
+      await Promise.all(products.map(product => {
+        product.photoId = newId;
+        return product.save();
+      }))
+      const photo = await PhotoDb.findByPk(newId);
+      return PhotoRepository.returnFromDatabase(photo);
     }
     throw new Error("Error uploading photo");
   }

@@ -11,7 +11,7 @@ export class PhotoUseCase {
     return this.photoRepository.save(filename);
   }
 
-  public async upload(filename: string, id: number): Promise<Photo> {
-    return this.photoRepository.upload(filename, id);
+  public async upload(newId: number, id: number): Promise<Photo> {
+    return this.photoRepository.upload(newId, id);
   }
 }
