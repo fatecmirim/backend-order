@@ -33,8 +33,11 @@ export class CustomerUseCase {
 
  public async getCustomerById(id: number): Promise<Customer> {
    const customer = await this.customerRepository.getCustomerById(id);
-  const decrypted = new Crypto().decrypt(customer.password || "");
-   customer.password = decrypted;
+   if(customer.password) {
+    const decrypted = new Crypto().decrypt(customer.password);
+    customer.password = decrypted;
+   }
+   console.log('customer', customer);
    return customer;
  }
 

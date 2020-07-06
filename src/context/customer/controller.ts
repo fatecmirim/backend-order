@@ -57,7 +57,7 @@ export class CustomerController {
       if (!id) return res.status(ResponseStatus.BAD_REQUEST).json("Provide the id");
       const customer = await this.customerUseCase.getCustomerById(id);
       if (customer) {
-        return res.status(ResponseStatus.SUCCESS).json(this.customerUseCase.customerResponse(customer));
+        return res.status(ResponseStatus.SUCCESS).json(customer);
       }
       return res.status(ResponseStatus.NOT_FOUND).json();
     } catch (error) {
