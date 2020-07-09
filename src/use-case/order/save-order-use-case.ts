@@ -16,7 +16,6 @@ export default class OrderUseCase {
   public async saveOrder(params: IParamsOrder): Promise<any> {
     const { customerId, items } = params;
     const isThereStockToAllProducts = await this.verifyIfExistStockToAllProducts(items);
-    console.log(isThereStockToAllProducts);
     
     if (!isThereStockToAllProducts) {
       throw { message:`Some of the products in the list there no stock available` };

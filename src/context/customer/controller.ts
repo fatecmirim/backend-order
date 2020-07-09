@@ -69,15 +69,14 @@ export class CustomerController {
     try {
       const { id } = req.params;
       const params = req.body;
-      // const haveAlreadyEmail = await this.customerUseCase.verifyIfHaveEmail(params.email);
-      // if(haveAlreadyEmail) return res.status(ResponseStatus.CONFLICT).json({ message: `The email ${params.email} already exists` });
+      const haveAlreadyEmail = params.email && await this.customerUseCase.verifyIfHaveEmail(params.email);
+      if(haveAlreadyEmail) throw new Error(`The email ${params.email} already exists`);
       if (!id) return res.status(ResponseStatus.BAD_REQUEST).json("Provide the id");
       const customerUpdated = await this.customerUseCase.updateCustomerById(id, params);
       if(customerUpdated) return res.status(ResponseStatus.SUCCESS).json(customerUpdated);
     } catch (error) {
       this.sendServerError(res, error);
     }
-    
   }
 
   private sendServerError(res, error?) {

@@ -14,8 +14,11 @@ export default class OrderRepository {
       order.customerId = row["customer_id"];
     }
     if(row["createdAt"]) {
-      const date = new Date(row["createdAt"]);
-      order.createdAt = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()}`;    
+      const date: Date = row["createdAt"];
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      order.createdAt = `${day}/${month}/${year}`;
     }
      order.accepted = row["accepted"];
     return order;
